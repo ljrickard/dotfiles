@@ -25,7 +25,6 @@ reattach-to-user-namespace
 s3cmd
 ssh-copy-id
 tig
-tmux
 todo-txt
 tree
 vim

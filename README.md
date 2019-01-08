@@ -1,17 +1,6 @@
 ## Target 
 
-This setup is for mac + vim + brew + tmux + zsh YMMV
-
-
-## Screenshot
-
-Command Sequence
-```
-` + "
-` + / + tmux
-```
-
-![Screenshot](https://github.com/ceocoder/dotfiles/raw/master/screenshot.gif)
+This setup is for mac + vim + brew + zsh YMMV
 
 ## Setup
 

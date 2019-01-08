@@ -1,6 +1,5 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.dotfiles/oh-my-zsh
-DEFAULT_USER='dp'
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
