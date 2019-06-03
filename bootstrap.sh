@@ -7,24 +7,19 @@ case $b_yn in
     [Yy]* )
         which brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         brew tap caskroom/cask
-        # brew install brew-cask
         while read -r line
         do
-            # brew install "$line"
-            echo $line
+            brew install "$line"
         done < frozen.brew
         while read -r line
         do
             HOMEBREW_CASK_OPTS="--appdir=/Applications" brew cask install "${line}"
         done < frozen.cask
         ;;
-    [Nn]* )
-        echo "OK, not installing..."
-        ;;
 esac
 
 
-read -rp "Replace old dot files? " b_yn
+read -rp "Create symbolic links to files? " b_yn
 case $b_yn in
     [Yy]* )
     epoch=$(date +"%s")
@@ -40,7 +35,7 @@ case $b_yn in
 esac
 
 
-read -rp "Changing default shell to zsh, OK? " yn
+read -rp "Change default shell to zsh? " yn
 case $yn in
     [Yy]* ) chsh -s "$(which zsh)"; ;;
 esac
