@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=/usr/local/bin:$HOME/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.dotfiles/oh-my-zsh
