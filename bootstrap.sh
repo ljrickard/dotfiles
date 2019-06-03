@@ -45,7 +45,7 @@ else
 fi
 
 epoch=$(date +"%s")
-for i in $HOME/.zshrc $HOME/.screenrc $HOME/.vim $HOME/.vimrc; do
+for i in $HOME/.zshrc $HOME/.screenrc; do
     if [[ ( -e $i ) || ( -h $i ) ]]; then
         echo "renaming ${i} to ${i}.old"
         mv "${i}" "${i}.${epoch}.old" || die "Could not move ${i} to ${i}.old"
@@ -54,12 +54,6 @@ done
 
 ln -sfv ${PWD}/zshrc ${HOME}/.zshrc
 ln -sfv ${PWD}/screenrc ${HOME}/.screenrc
-ln -sfv ${PWD}/vim ${HOME}/.vim
-ln -sfv ${PWD}/vimrc ${HOME}/.vimrc
-ln -sfv /usr/local/bin/vim /usr/local/bin/vi
-
-echo "Bootstrapping Vim Plugins" /usr/local/bin/vim  -c "BundleInstall" -c "q" -c "q"
-cd ~/.vim/bundle/YouCompleteMe && python ./install.py
 
 read -rp "Changing default shell to zsh, OK? " yn
 case $yn in
