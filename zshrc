@@ -1,20 +1,39 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.dotfiles/oh-my-zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="default"
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Comment this out to disable weekly auto-update checks
-DISABLE_AUTO_UPDATE="true"
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -25,8 +44,8 @@ DISABLE_AUTO_UPDATE="true"
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -35,101 +54,46 @@ COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$HOME/.dotfiles/zsh
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(
-  git
-)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# set PATH:
-[ -f "$ZSH/oh-my-zsh.sh" ] && . $ZSH/oh-my-zsh.sh
-[ -f '/opt/boxen/env.sh' ] && . '/opt/boxen/env.sh'
-
-# make PATH/path unique
-typeset -U path
-# prepend $HOME/bin to path
-path=($HOME/bin "$path[@]")
-
 # export MANPATH="/usr/local/man:$MANPATH"
 
-setopt hist_ignore_all_dups
-unsetopt correct_all
-bindkey -v
-bindkey "^r" history-incremental-search-backward
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-# Customize to your needs...
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-
-case $TERM in
-    screen|screen-w|screen-256color|screen-256color-bce)
-        alias titlecmd="screen_title"
-    ;;
-    xterm|xterm-256color|xterm-color)
-        alias titlecmd="xterm_title"
-    ;;
-    *)
-        alias titlecmd=":"
-    ;;
-esac
-
-## autoset title based on location and process
-
-#ssh() {
-#    screen_title "$1";
-#    titlecmd "$1";
-#    command ssh $*;
-#    screen_title "$HOSTNAME";
-#}
-
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
 #
-# end: Xterm and Screen title update
-set-show-tabs() {
-    global=
-    test "$1" = -g || test "$1" = --global && global=--global
-    cws=$(command git config $global core.whitespace)
-    case "$cws" in
-        tab-in-indent,*|*,tab-in-indent|*,tab-in-indent,*) ;;
-        *) command git config $global core.whitespace "$cws"${cws:+,}tab-in-indent ;;
-    esac
-}
-set-show-tabs           # only in local repository
-set-show-tabs --global  # for all your Git activities
-
-_complete_ssh_hosts ()
-{
-        COMPREPLY=()
-        cur="${COMP_WORDS[COMP_CWORD]}"
-        comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
-                        cut -f 1 -d ' ' | \
-                        sed -e s/,.*//g | \
-                        grep -v ^# | \
-                        uniq | \
-                        grep -v "\[" ;
-                cat ~/.ssh/config | \
-                        grep "^Host " | \
-                        awk '{print $2}'
-                `
-        COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
-        return 0
-}
-compctl -F _complete_ssh_hosts ssh
-compctl -F _complete_ssh_hosts rpup
-#compctl -o default -o nospace -W “$(awk ‘/^Host / {print $2}’ < $HOME/.ssh/config) scp sftp SSH
-# Bash-like command editing
-autoload -U edit-command-line; zle -N edit-command-line; bindkey '^X^e' edit-command-line;
-
-unalias gl
-[ -f /usr/local/bin/z.sh ] && . /usr/local/bin/z.sh
-[ -f '/usr/local/google-cloud-sdk/completion.zsh.inc' ] && . '/usr/local/google-cloud-sdk/completion.zsh.inc'
-[ -f '/usr/lib/google-cloud-sdk/path.zsh.inc' ] && . '/usr/lib/google-cloud-sdk/path.zsh.inc'
-[ -f '/usr/lib/google-cloud-sdk/completion.zsh.inc' ] && . '/usr/lib/google-cloud-sdk/completion.zsh.inc'
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
