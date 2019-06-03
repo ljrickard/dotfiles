@@ -44,9 +44,6 @@ read -rp "Replace old dot files? " b_yn
 case $b_yn in
     [Yy]* )
     if [[ $(uname) == 'Darwin' ]]; then
-        # echo "Installing Monaco Powerline font - click install"
-        # open Monaco-Powerline.otf
-
         echo "Installing custom iTerm2 color theme"
         open iterm2.itermcolors
     fi
