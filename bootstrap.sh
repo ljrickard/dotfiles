@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git clone --recursive git://github.com/ceocoder/dotfiles.git $HOME/.dotfiles && echo "Cloned dotfiles" || echo "Looks like dotfiles exist"
+git clone --recursive git://github.com/ljrickard/dotfiles.git $HOME/.dotfiles && echo "Cloned dotfiles" || echo "Looks like dotfiles exist"
 
 if [[ $(uname) == 'Darwin' ]]; then
     echo "Mac OS X detected: installing homebrew"
@@ -20,24 +20,26 @@ if [[ $(uname) == 'Darwin' ]]; then
             done < frozen.cask
             ;;
         [Nn]* )
-            echo "OK, not installing"
+            echo "OK, not installing... eixting"
+            exit 1
             ;;
     esac
 else
-    read -rp "Install zsh, vim? " t_yn
+    read -rp "Install zsh? " t_yn
     case $t_yn in
         [Yy]* )
             case $(lsb_release -i | cut -d':' -f2 | tr -d '\t') in
                 'CentOS')
-                    sudo yum install zsh vim
+                    sudo yum install zsh
                     ;;
                 'Debian'|'Ubuntu')
-                    sudo apt-get install zsh vim
+                    sudo apt-get install zsh
                     ;;
             esac
             ;;
         [Nn]* )
-            echo "Not installing zsh"
+            echo "Not installing zsh... eixting"
+            exit 1
             ;;
     esac
     echo "Seems like you are using this not on a Mac"
@@ -62,8 +64,8 @@ case $yn in
 esac
 
 if [[ $(uname) == 'Darwin' ]]; then
-    echo "Installing Monaco Powerline font - click install"
-    open Monaco-Powerline.otf
+    echo "Darwin not supported...."
+    exit 1
 
     echo "Installing custom iTerm2 color theme"
     open iterm2.itermcolors
