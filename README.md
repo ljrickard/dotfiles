@@ -1,12 +1,11 @@
 ## Target 
 
-This setup is for mac + vim + brew + zsh YMMV
+This setup is for mac + vim + zsh
 
 ## Setup
 
 ``` bash
 cd ~/
-git clone --recursive git://github.com/ceocoder/dotfiles.git .dotfiles
-cd .dotfiles && ./bootstrap.sh
-vim -c "BundleInstall"
+git clone --recursive git://github.com/ljrickard/dotfiles.git .dotfiles
+cd .dotfiles && ./bootstrap.sh"
 ```

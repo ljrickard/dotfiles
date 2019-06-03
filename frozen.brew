@@ -20,10 +20,12 @@ mercurial
 p7zip
 pcre
 pkg-config
+postgres
 proctools
 reattach-to-user-namespace
 s3cmd
 ssh-copy-id
+stern
 tig
 todo-txt
 tree
