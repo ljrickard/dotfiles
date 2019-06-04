@@ -8,6 +8,7 @@ colordiff
 coreutils
 direnv
 findutils
+fzf
 gettext
 glib
 gnu-getopt
@@ -15,6 +16,7 @@ gnu-tar
 gnu-sed
 gomplate
 kubectl
+kubectx
 kubernetes-cli
 kustomize
 lighttpd
