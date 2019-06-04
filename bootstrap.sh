@@ -1,6 +1,8 @@
 #!/bin/bash
 
-git clone --recursive git://github.com/ljrickard/dotfiles.git $HOME/.dotfiles 2> /dev/null && echo "Cloned dotfiles" || echo "dotfiles already exist"
+# this is not working too well - failed to clone recursively
+# git clone --recursive git://github.com/ljrickard/dotfiles.git $HOME/.dotfiles 2> /dev/null && echo "Cloned dotfiles" || echo "dotfiles already exist"
+git submodule update --init --recursive
 
 read -rp "Install homebrew and some useful packages? " b_yn
 case $b_yn in
