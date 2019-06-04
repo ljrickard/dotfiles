@@ -28,6 +28,7 @@ proctools
 protobuf
 pstree
 pre-commit
+python
 stern
 tig
 tree

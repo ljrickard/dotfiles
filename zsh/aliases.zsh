@@ -5,6 +5,7 @@ alias ....='cd ../../..'
 alias dot='cd ~/.dotfiles'
 alias ws='cd ~/workspace'
 alias ws-go='~/workspace/go/src/github.com/sojern/go'
+alias infra='~/workspace/infrastructure'
 
 # custom scripts
 alias boot="$HOME/.dotfiles/bootstrap.sh"

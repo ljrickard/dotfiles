@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# this is not working too well - failed to clone recursively
-# git clone --recursive git://github.com/ljrickard/dotfiles.git $HOME/.dotfiles 2> /dev/null && echo "Cloned dotfiles" || echo "dotfiles already exist"
 git submodule update --init --recursive
 
 read -rp "Install homebrew and some useful packages? " b_yn
@@ -25,7 +23,7 @@ read -rp "Create symbolic links to files? " b_yn
 case $b_yn in
     [Yy]* )
     epoch=$(date +"%s")
-    for i in $HOME/.zshrc $HOME/.screenrc; do
+    for i in $HOME/.zshrc do
         if [[ ( -e $i ) || ( -h $i ) ]]; then
             echo "renaming ${i} to ${i}.old"
             mv "${i}" "${i}.${epoch}.old" || die "Could not move ${i} to ${i}.old"
@@ -33,7 +31,6 @@ case $b_yn in
     done
 
     ln -sfv ${PWD}/zshrc ${HOME}/.zshrc
-    ln -sfv ${PWD}/screenrc ${HOME}/.screenrc
 esac
 
 
